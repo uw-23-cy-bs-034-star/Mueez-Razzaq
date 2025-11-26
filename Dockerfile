@@ -1,4 +1,3 @@
-
 FROM node:22.11.0 AS installer
 
 COPY . /juice-shop
