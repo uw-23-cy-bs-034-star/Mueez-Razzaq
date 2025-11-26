@@ -1,5 +1,4 @@
-# -------- BUILDER / INSTALLER IMAGE --------
-# Pinned Node.js version to avoid floating tags (Sonar rule docker:S6596)
+
 FROM node:22.11.0 AS installer
 
 COPY . /juice-shop
@@ -27,11 +26,6 @@ RUN npm install -g @cyclonedx/cyclonedx-npm@$CYCLONEDX_NPM_VERSION
 RUN npm run sbom
 
 
-# -------- RUNTIME IMAGE --------
-# Use a pinned distroless digest for reproducibility
-# Replace digest with the latest one from your system:
-# docker pull gcr.io/distroless/nodejs22-debian12
-# docker inspect --format='{{.RepoDigests}}' gcr.io/distroless/nodejs22-debian12
 FROM gcr.io/distroless/nodejs22-debian12@sha256:1111111111111111111111111111111111111111111111111111111111111111
 
 ARG BUILD_DATE
